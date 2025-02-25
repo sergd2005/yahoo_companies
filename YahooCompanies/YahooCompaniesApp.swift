@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct YahooCompaniesApp: App {
+    @State private var sortOrder = SortDescriptor(\Company.name)
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CompaniesFeedView(sortOrder: sortOrder)
         }
+        .modelContainer(for: Company.self)
     }
 }

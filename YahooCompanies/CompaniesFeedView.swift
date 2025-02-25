@@ -15,7 +15,7 @@ struct CompaniesFeedView: View {
     private let dataCoordinator: DataCoordinator
     
     init(sortOrder: SortDescriptor<Company> = SortDescriptor(\Company.name),
-         dataCoordinator: DataCoordinator = DataCoordinator()) {
+         dataCoordinator: DataCoordinator) {
         _companies = Query(sort:[sortOrder])
         self.dataCoordinator = dataCoordinator
     }
@@ -24,7 +24,7 @@ struct CompaniesFeedView: View {
         ScrollView {
             LazyVStack {
                 ForEach(companies) {
-                    Text($0.name)
+                    CompanyFeedItemView(viewModel: CompanyFeedItemViewModel(company: $0))
                 }
             }
         }
@@ -41,5 +41,5 @@ struct CompaniesFeedView: View {
 }
 
 #Preview {
-    CompaniesFeedView()
+    CompaniesFeedView(dataCoordinator: DataCoordinator())
 }

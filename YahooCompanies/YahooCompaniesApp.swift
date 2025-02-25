@@ -11,10 +11,23 @@ import SwiftData
 @main
 struct YahooCompaniesApp: App {
     @State private var sortOrder = SortDescriptor(\Company.name)
+    @State private var sortByName = true
     
     var body: some Scene {
         WindowGroup {
-            CompaniesFeedView(sortOrder: sortOrder)
+            TabView {
+                CompaniesFeedView(sortOrder: sortOrder, dataCoordinator: DataCoordinator())
+                    .tabItem {
+                        Text("Companies")
+                    }
+                SettingsView(sortByName: $sortByName)
+                    .tabItem {
+                        Text("Settings")
+                    }
+                    .onChange(of: sortByName) { oldValue, newValue in
+                        sortOrder = sortByName ? SortDescriptor(\Company.name) : SortDescriptor(\Company.cap, order: .reverse)
+                    }
+            }
         }
         .modelContainer(for: Company.self)
     }

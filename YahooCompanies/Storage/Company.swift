@@ -12,10 +12,12 @@ class Company {
     var name: String
     var symbol: String
     var cap: Int
+    var isFavorite: Bool
     
-    init(name: String = "", symbol: String = "", cap: Int = 0) {
+    init(name: String = "", symbol: String = "", cap: Int = 0, isFavorite: Bool = false) {
         self.name = name
         self.symbol = symbol
         self.cap = cap
+        self.isFavorite = isFavorite
     }
 }

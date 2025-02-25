@@ -7,6 +7,7 @@
 import SwiftData
 import Foundation
 
+@MainActor
 final class DataCoordinator {
     var modelContext: ModelContext?
     private let restApi: CompaniesFeedRestApi
